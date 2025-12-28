@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>แชร์โปรพิเศษ</title>
+
+<!-- LIFF SDK -->
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top, #2a0000, #000);
+  overflow: hidden;
+}
+
+/* 🔥 Glow Premium */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  background: conic-gradient(
+    #ffcc00,
+    #ff3300,
+    #ffcc00,
+    #ff3300,
+    #ffcc00
+  );
+  animation: spin 12s linear infinite;
+  opacity: 0.35;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+img {
+  width: 100%;
+  max-width: 360px;
+  border-radius: 18px;
+  box-shadow: 0 0 40px rgba(255,180,0,0.9);
+}
+
+h1 {
+  margin: 14px 0 6px;
+  color: #FFD700;
+  text-shadow: 0 0 15px #ff9800;
+}
+
+p {
+  color: #ffffff;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+button {
+  margin-top: 20px;
+  padding: 16px 36px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+  background: linear-gradient(90deg,#ffd700,#ff9800);
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  box-shadow: 0 0 30px rgba(255,215,0,1);
+}
+
+#status {
+  margin-top: 12px;
+  color: #00ffcc;
+  font-weight: bold;
+  display: none;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+  <img src="https://img5.pic.in.th/file/secure-sv1/image-62f34b9f4cf137b90.png" alt="promo">
+  <h1>🔥 พิเศษเครดิตฟรรี 🔥</h1>
+  <p>📌 แชร์ให้เพื่อนหรือกลุ่มเท่านั้น</p>
+
+  <button onclick="shareFlex()">⚡ แชร์ไป LINE</button>
+  <div id="status">✅ แชร์สำเร็จ กำลังพาไปต่อ…</div>
+</div>
+
+<script>
+async function initLIFF() {
+  await liff.init({
+    liffId: "2008689015-JUm8rjVA"
+  });
+}
+
+async function shareFlex() {
+
+  const flexMessage = {
+  type: "flex",
+  altText: "🔥 สิทธิ์พิเศษเฉพาะคุณ",
+  contents: {
+    type: "bubble",
+    size: "giga",
+
+    /* 🖼 HERO: ภาพล้วน ไม่บัง */
+    hero: {
+      type: "image",
+      url: "https://img5.pic.in.th/file/secure-sv1/image-62f34b9f4cf137b90.png",
+      size: "full",
+      aspectMode: "cover",
+      aspectRatio: "1:1"
+    },
+
+    /* 📝 BODY: ข้อความสั้น ด้านล่าง */
+    body: {
+      type: "box",
+      layout: "vertical",
+      backgroundColor: "#0f0f0f",
+      paddingAll: "12px",
+      contents: [
+        {
+          type: "text",
+          text: "🔥 สิทธิ์พิเศษเฉพาะคุณ",
+          weight: "bold",
+          size: "lg",
+          align: "center",
+          color: "#FFD700"
+        },
+        {
+          type: "text",
+          text: "โอกาสมีจำนวนจำกัด",
+          size: "sm",
+          align: "center",
+          color: "#ffffff",
+          margin: "sm"
+        }
+      ]
+    },
+
+    /* 👀 FOOTER: ปุ่มต้องกด */
+    footer: {
+      type: "box",
+      layout: "vertical",
+      backgroundColor: "#000000",
+      paddingAll: "14px",
+      contents: [
+        {
+          type: "button",
+          height: "md",
+          style: "primary",
+          color: "#FFD700",
+          action: {
+            type: "uri",
+            label: "▶ เข้ารับสิทธิ์ทันที",
+            uri: "https://opens24.carrd.co"
+          }
+        },
+        {
+          type: "text",
+          text: "REF: OP24-SHARE",
+          size: "xxs",
+          align: "center",
+          color: "#666666",
+          margin: "md"
+        }
+      ]
+    }
+  }
+};
+
+  // 📤 แชร์ Flex
+  await liff.shareTargetPicker([flexMessage]);
+
+  // แสดงสถานะ
+  document.getElementById("status").style.display = "block";
+
+  // ⚡ เด้งเว็บอัตโนมัติ
+  setTimeout(() => {
+    liff.openWindow({
+      url: "https://opens24.carrd.co",
+      external: true
+    });
+  }, 1200);
+}
+
+initLIFF();
+</script>
+</body>
+</html>
